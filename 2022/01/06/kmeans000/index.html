@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="被称为Clustering的无监督聚类算法（以下称聚类算法），它可以利用计算机分析数据并自动分类和提取信息。聚类算法可以用于网上购物系统，根据顾客的购买和浏览历史推荐符合其需求的产品；也被用于搜索引擎，以优化搜索结果中显示的网页，使其便于从更有用的网页中提取信息。 许多这样的数据需要大量的元素来解释，因此需要有技术来以易于理解的方式解释高维数据，并有效地对其进行分组。 　K-means ,也被称">
+  <meta name="description" content="被称为Clustering的无监督聚类算法（以下称聚类算法），它可以利用计算机分析数据并自动分类和提取信息。聚类算法可以用于网上购物系统，根据顾客的购买和浏览历史推荐符合其需求的产品；也被用于搜索引擎，以优化搜索结果中显示的网页，使其便于从更有用的网页中提取信息。 许多这样的数据需要大量的元素来解释，因此需要有技术来以易于理解的方式解释高维数据，并有效地对其进行分组。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kmeans算法概述及推导">
 <meta property="og:url" content="http://example.com/2022/01/06/kmeans000/index.html">
 <meta property="og:site_name" content="星空与道德律">
-<meta property="og:description" content="被称为Clustering的无监督聚类算法（以下称聚类算法），它可以利用计算机分析数据并自动分类和提取信息。聚类算法可以用于网上购物系统，根据顾客的购买和浏览历史推荐符合其需求的产品；也被用于搜索引擎，以优化搜索结果中显示的网页，使其便于从更有用的网页中提取信息。 许多这样的数据需要大量的元素来解释，因此需要有技术来以易于理解的方式解释高维数据，并有效地对其进行分组。 　K-means ,也被称">
+<meta property="og:description" content="被称为Clustering的无监督聚类算法（以下称聚类算法），它可以利用计算机分析数据并自动分类和提取信息。聚类算法可以用于网上购物系统，根据顾客的购买和浏览历史推荐符合其需求的产品；也被用于搜索引擎，以优化搜索结果中显示的网页，使其便于从更有用的网页中提取信息。 许多这样的数据需要大量的元素来解释，因此需要有技术来以易于理解的方式解释高维数据，并有效地对其进行分组。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-05T23:31:27.000Z">
-<meta property="article:modified_time" content="2023-01-23T07:04:06.637Z">
+<meta property="article:modified_time" content="2023-02-04T11:16:32.179Z">
 <meta property="article:author" content="Kz">
 <meta property="article:tag" content="Kmeans">
 <meta property="article:tag" content="HCM">
@@ -347,7 +347,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-23 15:04:06" itemprop="dateModified" datetime="2023-01-23T15:04:06+08:00">2023-01-23</time>
+                <time title="修改时间：2023-02-04 19:16:32" itemprop="dateModified" datetime="2023-02-04T19:16:32+08:00">2023-02-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -371,8 +371,8 @@ mjx-container[display="true"] + br {
 
       
         <p>　被称为Clustering的无监督聚类算法（以下称聚类算法），它可以利用计算机分析数据并自动分类和提取信息。聚类算法可以用于网上购物系统，根据顾客的购买和浏览历史推荐符合其需求的产品；也被用于搜索引擎，以优化搜索结果中显示的网页，使其便于从更有用的网页中提取信息。 许多这样的数据需要大量的元素来解释，因此需要有技术来以易于理解的方式解释高维数据，并有效地对其进行分组。</p>
-<p>　K-means ,也被称为Hard c-means（HCM），是基于欧式距离的一种聚类算法。其基本观点在于，跟据既定的聚类个数分别推导聚类中心。</p>
 <span id="more"></span>
+<p>　K-means ,也被称为Hard c-means（HCM），是基于欧式距离的一种聚类算法。其基本观点在于，跟据既定的聚类个数分别推导聚类中心。</p>
 <h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>　首先我们给出一个<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.439ex" xmlns="http://www.w3.org/2000/svg" width="1.79ex" height="2.032ex" role="img" focusable="false" viewBox="0 -704 791 898"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g></g></g></svg></mjx-container>维<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 888 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g></g></g></svg></mjx-container>组的向量<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.928ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 852 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g></g></g></svg></mjx-container>，</p>
 <script type="math/tex; mode=display">\displaylines{X = \{ x_1 = (x_{1,1}, · · · , x_{1,q}, · · · , x_{1,Q})\},  · · · ,\\
 \{ x_k = (x_{k,1}, · · · , x_{k,q}, · · · , x_{k,Q}) \}, · · · , \\
@@ -417,7 +417,10 @@ minimize_{G,V} J(G,V)  =minimize_{G,V} \sum_{i=1}^{C} \sum_{x \in G_i} d(x, v_i)
     <a href="/2022/01/05/%E5%8F%8D%E6%80%9D/" rel="prev" title="一点交流态度上的反思">
       <i class="fa fa-chevron-left"></i> 一点交流态度上的反思
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/02/04/regression/" rel="next" title="1. Regression">
+      1. Regression <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -497,7 +500,7 @@ minimize_{G,V} J(G,V)  =minimize_{G,V} \sum_{i=1}^{C} \sum_{x \in G_i} d(x, v_i)
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
